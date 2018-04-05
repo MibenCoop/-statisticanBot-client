@@ -8,22 +8,30 @@ class HomePage extends Component {
     componentDidMount() {
         this.props.getMessages();        
     }
-    getMostFrequentMessage = (messages) => {
-        const messageList = messages.map(message => message.text )
-        const messagesFiltered = messageList
-            .sort((a,b) =>  
-                messageList.filter(v => v === a).length - messageList.filter(v => v === b).length)                        
+    getFrequentMessages = (messages) => {
+        const messagesList = messages.map(message => message.text )
+        return messagesList
+            .sort((a,b) => messagesList.filter(v => v === a).length - messagesList.filter(v => v === b).length)                        
             .filter((elem, index, self) => index === self.indexOf(elem))
-            .reverse();
-        return messagesFiltered;
+            .reverse()
+    }
+
+    getFrequentMessagesAmount = (filterMessages, messages) => {
+        return filterMessages
+            .map(message => messages.filter(v => v.text === message).length)
     }
     render() {
         const { messages } = this.props;
-        const filterMessages =this.getMostFrequentMessage(messages); 
+        const frequentMessages =this.getFrequentMessages(messages); 
+        const frequentMessagesAmount =this.getFrequentMessagesAmount(frequentMessages, messages); 
         return (
             <div>
                 Messages amount: {Array.from(messages).length}<br/>
-                Top most frequent messages: <MessagesTop messages={filterMessages} />
+                Top 5 most frequent messages: 
+                <MessagesTop 
+                    messages={frequentMessages.slice(0,5)}
+                    messageAmount = {frequentMessagesAmount}
+                 />
             </div>
         );
     }

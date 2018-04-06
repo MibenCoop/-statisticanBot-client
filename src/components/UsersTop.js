@@ -6,8 +6,14 @@ const UsersTop = (props) => {
             <b>{user}</b><br/>
             <ul>
                 <li><b>Amount of Messages: </b>{userMessageAmount[index]}</li> 
-                <li><b>First Message: </b>{firstMessage[index]}</li>
-                <li><b>Last Message: </b>{lastMessage[index]}</li>
+                <li>
+                    <b>First Message text: </b>{firstMessage[index].text}   
+                    <b>Date:</b>{firstMessage[index].date} 
+                </li>
+                <li>
+                    <b>Last Message text: </b>{lastMessage[index].text}   
+                    <b>Date:</b>{lastMessage[index].date} 
+                </li>
             </ul> 
          </li>))
     

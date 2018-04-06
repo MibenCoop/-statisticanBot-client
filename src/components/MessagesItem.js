@@ -3,7 +3,7 @@ import React from 'react';
 const MessagesItem = (props) => {
     const { message } = props;
     return(
-        <div>{message.username} : {message.text}</div>
+        <div><b>{message.username}</b> : {message.text}  <b>Date:</b> {message.date}</div>
     );
 }
 

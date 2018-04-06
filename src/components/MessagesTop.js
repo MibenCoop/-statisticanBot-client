@@ -1,13 +1,19 @@
 import React from 'react';
+import { getMessagesAmount, getMessagesInfo}  from '../utils/handlingMessages'
+
 const MessagesTop = (props) => {
-    const { messages, messageAmount } = props;
-    const messagesList = messages.map((message, index) => 
-        (<li key={index}>{message}: {messageAmount[index]} </li>))
-    
+    const { messages } = props;
+    const frequentMessages = getMessagesInfo(messages, "text");
+    const messagesAmount = getMessagesAmount(frequentMessages, messages, "text"); 
+    const messagesList = (frequentMessages.slice(0,5)).map((message, index) => 
+        (<li key={index}>{message}: {messagesAmount[index]} </li>))    
     return(
-        <ul>
-            {messagesList}
-        </ul>
+        <section>
+            <h3>Top 5 most frequent messages:</h3> 
+            <ul>
+                {messagesList}
+            </ul>
+        </section>
     );
 }
 

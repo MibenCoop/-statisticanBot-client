@@ -43,19 +43,9 @@ const getMessagesForMonth = (messages) => {
 }
 
 
-const getChartData = (filterMessagesData, label) => {
-    return filterMessagesData
-        .map(message => { 
-            console.log('label, message.data',label, message.date)
-        })
-}
-
 const getChartMessages = (messages, labels) => {
-    let data = [];
-    console.log('labels, messages',labels, messages)
     if (labels !== undefined) {
         const messagesValidDate = getMessagesForMonth(messages)
-        console.log('messagesValidDate',messagesValidDate)
         return labels.map(label => 
             messagesValidDate
                 .filter(v => (new Date(v.date * 1000).getDate() === label)).length

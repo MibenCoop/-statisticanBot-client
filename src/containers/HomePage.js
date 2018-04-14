@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import MessagesTop from '../components/MessagesTop'
 import UsersTop from '../components/UsersTop';
 import Chart from '../components/Chart';
-
+import { CHART_DATA } from '../chartConstants'
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -19,22 +19,12 @@ class HomePage extends Component {
     }
 
     getChartData(){
-        // Ajax calls here
-        let labels =  [];
-        for ( let i = 1; i < 31; i++ ) {
-            labels.push(i);
-        }
+        //Generate array with days
+        const labels = Array.from(new Array(30),(val,index)=>index+1);
+        let chartData = Object.assign({}, CHART_DATA);
+        chartData.labels = labels;
         this.setState({
-          chartData:{
-            labels,
-            datasets:[
-              {
-                label:'Messages Amount',
-                data: ["Hello"],
-                backgroundColor:'rgba(255, 99, 132, 0.6)'
-              }
-            ]
-          }
+          chartData
         });
       }
     

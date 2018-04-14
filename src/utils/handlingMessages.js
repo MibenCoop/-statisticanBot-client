@@ -31,5 +31,39 @@ const getMessagesDate = (activeUsers, messages, compareFunc) =>
         )
        .map(message => getValidData(message[0]))
 
+const validMonth = (message) => {
+    const date = new Date(message.date*1000);
+    return date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+}
+
+const getMessagesForMonth = (messages) => {
+    const date = new Date();
+    const currMonth = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1); 
+    return messages.filter(message => validMonth(message) === currMonth )
+}
+
+
+const getChartData = (filterMessagesData, label) => {
+    return filterMessagesData
+        .map(message => { 
+            console.log('label, message.data',label, message.date)
+        })
+}
+
+const getChartMessages = (messages, labels) => {
+    let data = [];
+    console.log('labels, messages',labels, messages)
+    if (labels !== undefined) {
+        const messagesValidDate = getMessagesForMonth(messages)
+        console.log('messagesValidDate',messagesValidDate)
+        return labels.map(label => 
+            messagesValidDate
+                .filter(v => (new Date(v.date * 1000).getDate() === label)).length
+        )
+        
+    }
+    return 0;
+}
+       
 export default getValidData;
-export { getMessagesAmount, getMessagesInfo, getMessagesDate};
+export { getMessagesAmount, getMessagesInfo, getMessagesDate, getChartMessages};
